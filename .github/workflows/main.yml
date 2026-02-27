@@ -11,13 +11,14 @@ on:
     inputs:
       OS_python_version:
         description: 'Select the OS and Python version for the deploy'
-        required: true
+        required: false
         type: choice
         options:
           - ubuntu-latest-3.8
           - ubuntu-latest-3.9
           - windows-latest-3.8
           - windows-latest-3.9
+        default: ubuntu-latest-3.9
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
