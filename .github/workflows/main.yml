@@ -72,8 +72,8 @@ jobs:
 
       - name: Upload python artifacts
         if: ${{ 
-          (github.event_name == 'workflow_dispatch' && matrix.OS + '-' + matrix.python-version == inputs.OS_python_version)
-          || (github.event_name != 'workflow_dispatch')
+          (github.event_name == 'workflow_dispatch' && github.ref_name == 'main' && matrix.OS + '-' + matrix.python-version == inputs.OS_python_version)
+          || (github.event_name != 'workflow_dispatch' && github.ref_name == 'main' && matrix.OS == 'ubuntu-latest' && matrix.python-version == '3.9')
         }}
         uses: actions/upload-artifact@v4
         with:
@@ -83,7 +83,7 @@ jobs:
       - name: Upload helm artifacts
         if: ${{ 
           (github.event_name == 'workflow_dispatch' && github.ref_name == 'main' && matrix.OS + '-' + matrix.python-version == inputs.OS_python_version)
-          || (github.event_name != 'workflow_dispatch' && github.ref_name == 'main')
+          || (github.event_name != 'workflow_dispatch' && github.ref_name == 'main' && matrix.OS == 'ubuntu-latest' && matrix.python-version == '3.9')
         }}
         uses: actions/upload-artifact@v4
         with:
@@ -93,7 +93,7 @@ jobs:
       - name: Upload kind cluster artifact
         if: ${{ 
           (github.event_name == 'workflow_dispatch' && github.ref_name == 'main' && matrix.OS + '-' + matrix.python-version == inputs.OS_python_version)
-          || (github.event_name != 'workflow_dispatch' && github.ref_name == 'main')
+          || (github.event_name != 'workflow_dispatch' && github.ref_name == 'main' && matrix.OS == 'ubuntu-latest' && matrix.python-version == '3.9')
         }}
         uses: actions/upload-artifact@v4
         with:
